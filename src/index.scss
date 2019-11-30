@@ -1,0 +1,75 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background: url("./assets/images/theme01.jpg") no-repeat;
+  background-position: top left;
+  //background-size: cover;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 10px;
+
+  .board-area {
+    flex: 1;
+
+    .board {
+      margin: 20px auto;
+      background: url("assets/images/board-bg-1.jpg");
+      background-size: cover;
+      box-shadow: 0 0 20px #bbb;
+
+      .board-row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+
+        .circle-item {
+          background-color: #dddddd;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .btns-area {
+    width: 400px;
+    height: 400px;
+
+    > div {
+      background: #eee;
+      border: 1px solid #aaa;
+      padding: 10px;
+
+      h4 {
+        margin: 10px 0;
+      }
+    }
+
+    .theme {
+      .themes-wrap {
+        button {
+          width: 50px;
+          height: 50px;
+          border-style: none;
+          outline: none;
+          background-size: 50px 50px;
+          margin-right: 15px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
