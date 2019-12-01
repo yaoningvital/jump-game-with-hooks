@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../index.scss'
 import Board from './Board'
-import { circlesDefault } from '../utils'
+import { circlesDefault, gameBackgroundImages } from '../utils'
 import SelectTheme from './operate-area/SelectTheme'
 
 
@@ -12,11 +12,23 @@ function Game () {
   })
   
   // 主题
-  let [theme, setTheme] = useState(4)
+  let [theme, setTheme] = useState(0)
+  
+  function handleSelectTheme (index) {
+    setTheme(index)
+  }
   
   
   return (
     <div className="game">
+      <div
+        className="show-theme"
+        style={{
+          backgroundImage: gameBackgroundImages[theme]
+        }}
+      >
+      
+      </div>
       <Board
         r={layout.r}
         a={layout.a}
@@ -25,7 +37,8 @@ function Game () {
       />
       <div className="btns-area">
         <SelectTheme
-        
+          theme={theme}
+          handleSelectTheme={(index) => handleSelectTheme(index)}
         />
       </div>
     </div>

@@ -1,16 +1,19 @@
 import React from 'react'
 import Circle from './Circle'
+import { gameBackgroundImages } from "../utils";
 
 function Board (props) {
-  let {circles, r, a,theme} = props
+  let {circles, r, a, theme} = props
   return (
-    <div className="board-area">
+    <div
+      className="board-area"
+    >
       <div
         className="board"
         style={{
           width: `${29.44486 * (r + a / 2)}px`,
           height: `${29.44486 * (r + a / 2)}px`,
-          borderRadius: `${14.7224 * (r + a / 2)}px`
+          borderRadius: `${14.7224 * (r + a / 2)}px`,
         }}
       >
         {

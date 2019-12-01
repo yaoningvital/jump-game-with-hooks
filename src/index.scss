@@ -1,13 +1,6 @@
-html {
-  height: 100%;
-}
 
 body {
   margin: 0;
-  height: 100%;
-  background: url("./assets/images/theme01.jpg") no-repeat;
-  background-position: top left;
-  //background-size: cover;
 }
 
 .game {
@@ -15,13 +8,19 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  padding: 10px;
+  margin: 10px;
+
+  .show-theme {
+    width: 380px;
+    background-repeat: no-repeat;
+    background-position: right top;
+  }
 
   .board-area {
     flex: 1;
 
     .board {
-      margin: 20px auto;
+      margin: 20px auto 0;
       background: url("assets/images/board-bg-1.jpg");
       background-size: cover;
       box-shadow: 0 0 20px #bbb;
@@ -60,14 +59,29 @@ body {
 
     .theme {
       .themes-wrap {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+
         button {
           width: 50px;
           height: 50px;
           border-style: none;
           outline: none;
           background-size: 50px 50px;
+          background-position: center center;
           margin-right: 15px;
           cursor: pointer;
+          margin-bottom: 10px;
+
+          &.current-theme {
+            width: 66px;
+            height: 66px;
+            border: 6px solid #9ACD32;
+            background-size: 54px 54px;
+          }
         }
       }
     }

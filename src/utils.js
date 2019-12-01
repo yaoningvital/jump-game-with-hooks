@@ -43,6 +43,11 @@ import circle_bg_4_5 from './assets/images/circle_bg_4_5.jpg'
 import circle_bg_4_6 from './assets/images/circle_bg_4_6.jpg'
 import circle_bg_4_7 from './assets/images/circle_bg_4_7.jpg'
 import circle_bg_4_8 from './assets/images/circle_bg_4_8.jpg'
+import theme01 from './assets/images/theme01.png'
+import theme02 from './assets/images/theme02.png'
+import theme03 from './assets/images/theme03.png'
+import theme04 from './assets/images/theme04.png'
+import theme05 from './assets/images/theme05.png'
 
 export const backgroundImageArr = [
   [
@@ -102,64 +107,80 @@ export const backgroundImageArr = [
   ]
 ]
 
+export const themes = [
+  `url(${circle_bg_0_0})`,
+  `url(${circle_bg_1_0})`,
+  `url(${circle_bg_2_0})`,
+  `url(${circle_bg_3_0})`,
+  `url(${circle_bg_4_0})`,
+]
+
+export const gameBackgroundImages = [
+  `url(${theme01})`,
+  `url(${theme02})`,
+  `url(${theme03})`,
+  `url(${theme04})`,
+  `url(${theme05})`,
+
+]
 
 export let circlesDefault = [ // 默认全部为灰色
   [ // 一行
-    {x: 0, y: 4, z: 4, role: 0, rowIndex: 0, columnIndex: 0},  // 一个点
+    {x: 0, y: 4, z: 4, role: null, rowIndex: 0, columnIndex: 0},  // 一个点
   ],
   [
-    {x: 1, y: 3, z: 4, role: 0, rowIndex: 1, columnIndex: 0},
-    {x: 1, y: 4, z: 5, role: 0, rowIndex: 1, columnIndex: 1},
+    {x: 1, y: 3, z: 4, role: null, rowIndex: 1, columnIndex: 0},
+    {x: 1, y: 4, z: 5, role: null, rowIndex: 1, columnIndex: 1},
   ],
   [
-    {x: 2, y: 2, z: 4, role: 1, rowIndex: 2, columnIndex: 0},
-    {x: 2, y: 3, z: 5, role: 1, rowIndex: 2, columnIndex: 1},
-    {x: 2, y: 4, z: 6, role: 1, rowIndex: 2, columnIndex: 2},
+    {x: 2, y: 2, z: 4, role: null, rowIndex: 2, columnIndex: 0},
+    {x: 2, y: 3, z: 5, role: null, rowIndex: 2, columnIndex: 1},
+    {x: 2, y: 4, z: 6, role: null, rowIndex: 2, columnIndex: 2},
   ],
   [
-    {x: 3, y: 1, z: 4, role: 2, rowIndex: 3, columnIndex: 0},
-    {x: 3, y: 2, z: 5, role: 2, rowIndex: 3, columnIndex: 1},
-    {x: 3, y: 3, z: 6, role: 2, rowIndex: 3, columnIndex: 2},
-    {x: 3, y: 4, z: 7, role: 2, rowIndex: 3, columnIndex: 3},
+    {x: 3, y: 1, z: 4, role: null, rowIndex: 3, columnIndex: 0},
+    {x: 3, y: 2, z: 5, role: null, rowIndex: 3, columnIndex: 1},
+    {x: 3, y: 3, z: 6, role: null, rowIndex: 3, columnIndex: 2},
+    {x: 3, y: 4, z: 7, role: null, rowIndex: 3, columnIndex: 3},
   ],
   [
-    {x: 4, y: -4, z: 0, role: 3, rowIndex: 4, columnIndex: 0},
-    {x: 4, y: -3, z: 1, role: 3, rowIndex: 4, columnIndex: 1},
-    {x: 4, y: -2, z: 2, role: 3, rowIndex: 4, columnIndex: 2},
-    {x: 4, y: -1, z: 3, role: 3, rowIndex: 4, columnIndex: 3},
-    {x: 4, y: 0, z: 4, role: 4, rowIndex: 4, columnIndex: 4},
-    {x: 4, y: 1, z: 5, role: 4, rowIndex: 4, columnIndex: 5},
-    {x: 4, y: 2, z: 6, role: 4, rowIndex: 4, columnIndex: 6},
-    {x: 4, y: 3, z: 7, role: 4, rowIndex: 4, columnIndex: 7},
-    {x: 4, y: 4, z: 8, role: 4, rowIndex: 4, columnIndex: 8},
-    {x: 4, y: 5, z: 9, role: 5, rowIndex: 4, columnIndex: 9},
-    {x: 4, y: 6, z: 10, role: 5, rowIndex: 4, columnIndex: 10},
-    {x: 4, y: 7, z: 11, role: 5, rowIndex: 4, columnIndex: 11},
-    {x: 4, y: 8, z: 12, role: 5, rowIndex: 4, columnIndex: 12},
+    {x: 4, y: -4, z: 0, role: null, rowIndex: 4, columnIndex: 0},
+    {x: 4, y: -3, z: 1, role: null, rowIndex: 4, columnIndex: 1},
+    {x: 4, y: -2, z: 2, role: null, rowIndex: 4, columnIndex: 2},
+    {x: 4, y: -1, z: 3, role: null, rowIndex: 4, columnIndex: 3},
+    {x: 4, y: 0, z: 4, role: null, rowIndex: 4, columnIndex: 4},
+    {x: 4, y: 1, z: 5, role: null, rowIndex: 4, columnIndex: 5},
+    {x: 4, y: 2, z: 6, role: null, rowIndex: 4, columnIndex: 6},
+    {x: 4, y: 3, z: 7, role: null, rowIndex: 4, columnIndex: 7},
+    {x: 4, y: 4, z: 8, role: null, rowIndex: 4, columnIndex: 8},
+    {x: 4, y: 5, z: 9, role: null, rowIndex: 4, columnIndex: 9},
+    {x: 4, y: 6, z: 10, role: null, rowIndex: 4, columnIndex: 10},
+    {x: 4, y: 7, z: 11, role: null, rowIndex: 4, columnIndex: 11},
+    {x: 4, y: 8, z: 12, role: null, rowIndex: 4, columnIndex: 12},
   ],
   [
-    {x: 5, y: -4, z: 1, role: 6, rowIndex: 5, columnIndex: 0},
-    {x: 5, y: -3, z: 2, role: 6, rowIndex: 5, columnIndex: 1},
-    {x: 5, y: -2, z: 3, role: 6, rowIndex: 5, columnIndex: 2},
-    {x: 5, y: -1, z: 4, role: 6, rowIndex: 5, columnIndex: 3},
-    {x: 5, y: 0, z: 5, role: 7, rowIndex: 5, columnIndex: 4},
-    {x: 5, y: 1, z: 6, role: 7, rowIndex: 5, columnIndex: 5},
-    {x: 5, y: 2, z: 7, role: 7, rowIndex: 5, columnIndex: 6},
-    {x: 5, y: 3, z: 8, role: 7, rowIndex: 5, columnIndex: 7},
-    {x: 5, y: 4, z: 9, role: 8, rowIndex: 5, columnIndex: 8},
-    {x: 5, y: 5, z: 10, role: 8, rowIndex: 5, columnIndex: 9},
-    {x: 5, y: 6, z: 11, role: 8, rowIndex: 5, columnIndex: 10},
-    {x: 5, y: 7, z: 12, role: 8, rowIndex: 5, columnIndex: 11},
+    {x: 5, y: -4, z: 1, role: null, rowIndex: 5, columnIndex: 0},
+    {x: 5, y: -3, z: 2, role: null, rowIndex: 5, columnIndex: 1},
+    {x: 5, y: -2, z: 3, role: null, rowIndex: 5, columnIndex: 2},
+    {x: 5, y: -1, z: 4, role: null, rowIndex: 5, columnIndex: 3},
+    {x: 5, y: 0, z: 5, role: null, rowIndex: 5, columnIndex: 4},
+    {x: 5, y: 1, z: 6, role: null, rowIndex: 5, columnIndex: 5},
+    {x: 5, y: 2, z: 7, role: null, rowIndex: 5, columnIndex: 6},
+    {x: 5, y: 3, z: 8, role: null, rowIndex: 5, columnIndex: 7},
+    {x: 5, y: 4, z: 9, role: null, rowIndex: 5, columnIndex: 8},
+    {x: 5, y: 5, z: 10, role: null, rowIndex: 5, columnIndex: 9},
+    {x: 5, y: 6, z: 11, role: null, rowIndex: 5, columnIndex: 10},
+    {x: 5, y: 7, z: 12, role: null, rowIndex: 5, columnIndex: 11},
   ],
   [
-    {x: 6, y: -4, z: 2, role: 9, rowIndex: 6, columnIndex: 0},
-    {x: 6, y: -3, z: 3, role: 9, rowIndex: 6, columnIndex: 1},
-    {x: 6, y: -2, z: 4, role: 9, rowIndex: 6, columnIndex: 2},
-    {x: 6, y: -1, z: 5, role: 9, rowIndex: 6, columnIndex: 3},
-    {x: 6, y: 0, z: 6, role: 10, rowIndex: 6, columnIndex: 4},
-    {x: 6, y: 1, z: 7, role: 10, rowIndex: 6, columnIndex: 5},
-    {x: 6, y: 2, z: 8, role: 10, rowIndex: 6, columnIndex: 6},
-    {x: 6, y: 3, z: 9, role: 10, rowIndex: 6, columnIndex: 7},
+    {x: 6, y: -4, z: 2, role: null, rowIndex: 6, columnIndex: 0},
+    {x: 6, y: -3, z: 3, role: null, rowIndex: 6, columnIndex: 1},
+    {x: 6, y: -2, z: 4, role: null, rowIndex: 6, columnIndex: 2},
+    {x: 6, y: -1, z: 5, role: null, rowIndex: 6, columnIndex: 3},
+    {x: 6, y: 0, z: 6, role: null, rowIndex: 6, columnIndex: 4},
+    {x: 6, y: 1, z: 7, role: null, rowIndex: 6, columnIndex: 5},
+    {x: 6, y: 2, z: 8, role: null, rowIndex: 6, columnIndex: 6},
+    {x: 6, y: 3, z: 9, role: null, rowIndex: 6, columnIndex: 7},
     {x: 6, y: 4, z: 10, role: null, rowIndex: 6, columnIndex: 8},
     {x: 6, y: 5, z: 11, role: null, rowIndex: 6, columnIndex: 9},
     {x: 6, y: 6, z: 12, role: null, rowIndex: 6, columnIndex: 10},
