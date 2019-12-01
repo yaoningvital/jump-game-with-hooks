@@ -1,9 +1,10 @@
 import React from 'react'
 import Circle from './Circle'
-import { gameBackgroundImages } from "../utils";
+import { isAbleReceiveCell } from '../utils'
 
 function Board (props) {
-  let {circles, r, a, theme} = props
+  let {circles, r, a, theme, handleClickCircle, currentSelectedCell, ableReceiveCells} = props
+  
   return (
     <div
       className="board-area"
@@ -28,6 +29,7 @@ function Board (props) {
               >
                 {
                   rowArr.map((circleItem, columnIndex) => {
+                    let ableReceive = isAbleReceiveCell(ableReceiveCells, circleItem)
                     return (
                       <Circle
                         key={columnIndex}
@@ -35,6 +37,9 @@ function Board (props) {
                         r={r}
                         a={a}
                         theme={theme}
+                        handleClickCircle={handleClickCircle}
+                        currentSelectedCell={currentSelectedCell}
+                        ableReceive={ableReceive}
                       />
                     )
                   })

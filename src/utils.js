@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import circle_bg_0_0 from './assets/images/circle_bg_0_0.jpg'
 import circle_bg_0_1 from './assets/images/circle_bg_0_1.jpg'
 import circle_bg_0_2 from './assets/images/circle_bg_0_2.jpg'
@@ -124,7 +125,7 @@ export const gameBackgroundImages = [
 
 ]
 
-export let circlesDefault = [ // 默认全部为灰色
+export const circlesDefault = [ // 默认全部为灰色
   [ // 一行
     {x: 0, y: 4, z: 4, role: null, rowIndex: 0, columnIndex: 0},  // 一个点
   ],
@@ -281,3 +282,171 @@ export let circlesDefault = [ // 默认全部为灰色
     {x: 16, y: -4, z: 12, role: null, rowIndex: 16, columnIndex: 0},
   ]
 ]
+
+/**
+ * 从数组 selectedRoles 中，删除 roleIndex，返回删除这一项后的数组
+ * @param selectedRoles
+ * @param roleIndex
+ */
+export function deleteRole (selectedRoles, roleIndex) {
+  return selectedRoles.filter(role => role !== roleIndex)
+}
+
+/**
+ * 添加一项 roleIndex 进数组 selectedRoles，使返回的数组中的项还是升序排列
+ * @param selectedRoles
+ * @param roleIndex
+ */
+export function addRole (selectedRoles, roleIndex) {
+  let insertIndex = selectedRoles.findIndex(role => role > roleIndex)
+  if (insertIndex !== -1) {
+    selectedRoles.splice(insertIndex, 0, roleIndex)
+  } else {
+    selectedRoles.push(roleIndex)
+  }
+  
+  return selectedRoles
+}
+
+/**
+ * 更新棋盘初始的棋子布局 ，返回 circlesOrigin
+ * @param theme
+ * @param selectedRoles
+ */
+export function updateBoardCirclesLayout (theme, selectedRoles) {
+  let circlesOrigin = _.cloneDeep(circlesDefault)
+  if (selectedRoles.length === 1) {
+    // 设置 南边10子 为给定的角色
+    setSouthTenGivenRole(circlesOrigin, selectedRoles[0])
+  } else if (selectedRoles.length === 2) {
+    setSouthTenGivenRole(circlesOrigin, selectedRoles[0])
+    setNorthTenGivenRole(circlesOrigin, selectedRoles[1])
+  } else if (selectedRoles.length === 3) {
+    setSouthTenGivenRole(circlesOrigin, selectedRoles[0])
+    setWestNorthTenGivenRole(circlesOrigin, selectedRoles[1])
+    setEastNorthTenGivenRole(circlesOrigin, selectedRoles[2])
+  } else if (selectedRoles.length === 4) {
+    setSouthTenGivenRole(circlesOrigin, selectedRoles[0])
+    setWestSouthTenGivenRole(circlesOrigin, selectedRoles[1])
+    setNorthTenGivenRole(circlesOrigin, selectedRoles[2])
+    setEastNorthTenGivenRole(circlesOrigin, selectedRoles[3])
+  } else if (selectedRoles.length === 5) {
+    setSouthTenGivenRole(circlesOrigin, selectedRoles[0])
+    setWestSouthTenGivenRole(circlesOrigin, selectedRoles[1])
+    setWestNorthTenGivenRole(circlesOrigin, selectedRoles[2])
+    setNorthTenGivenRole(circlesOrigin, selectedRoles[3])
+    setEastNorthTenGivenRole(circlesOrigin, selectedRoles[4])
+  } else if (selectedRoles.length === 6) {
+    setSouthTenGivenRole(circlesOrigin, selectedRoles[0])
+    setWestSouthTenGivenRole(circlesOrigin, selectedRoles[1])
+    setWestNorthTenGivenRole(circlesOrigin, selectedRoles[2])
+    setNorthTenGivenRole(circlesOrigin, selectedRoles[3])
+    setEastNorthTenGivenRole(circlesOrigin, selectedRoles[4])
+    setEastSouthTenGivenRole(circlesOrigin, selectedRoles[5])
+  }
+  
+  return circlesOrigin
+}
+
+/**
+ * 设置 南边10子 为给定的角色
+ * @param circles
+ * @param role: 给定的角色
+ */
+function setSouthTenGivenRole (circles, role) {
+  for (let i = circles.length - 4; i < circles.length; i++) {
+    for (let j = 0; j < circles[i].length; j++) {
+      circles[i][j].role = role
+    }
+  }
+}
+
+/**
+ * 设置 西南边10子 为给定的角色
+ * @param circles
+ * @param role
+ */
+function setWestSouthTenGivenRole (circles, role) {
+  for (let i = 9; i < 13; i++) {
+    for (let j = 0; j < i - 8; j++) {
+      circles[i][j].role = role
+    }
+  }
+}
+
+/**
+ * 设置 西北边10子 为给定的角色
+ * @param circles
+ * @param role
+ */
+function setWestNorthTenGivenRole (circles, role) {
+  for (let i = 4; i < 8; i++) {
+    for (let j = 0; j < 8 - i; j++) {
+      circles[i][j].role = role
+    }
+  }
+}
+
+/**
+ * 设置 北边10子 为给定的角色
+ * @param circles
+ * @param role
+ */
+function setNorthTenGivenRole (circles, role) {
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < circles[i].length; j++) {
+      circles[i][j].role = role
+    }
+  }
+}
+
+/**
+ * 设置 东北边10子 为给定的角色
+ * @param circles
+ * @param role
+ */
+function setEastNorthTenGivenRole (circles, role) {
+  for (let i = 4; i < 8; i++) {
+    for (let j = 9; j < 17 - i; j++) {
+      circles[i][j].role = role
+    }
+  }
+}
+
+/**
+ * 设置 东南边10子 为给定的角色
+ * @param circles
+ * @param role
+ */
+function setEastSouthTenGivenRole (circles, role) {
+  for (let i = 9; i < 13; i++) {
+    for (let j = 9; j < i + 1; j++) {
+      circles[i][j].role = role
+    }
+  }
+}
+
+/**
+ * 返回还没有完成游戏的角色
+ * @param selectedRoles : 已经选择的角色
+ * @param ranking : 已经完成游戏的角色
+ */
+export function getNotCompleteRoles (selectedRoles, ranking) {
+  return selectedRoles.filter(role => !ranking.includes(role))
+}
+
+/**
+ * 判断 某一个格子 是不是 当前所有落子点中的一个
+ * @param ableReceiveCells : 所有的落子点
+ * @param circleItem : 某一个格子
+ */
+export function isAbleReceiveCell (ableReceiveCells, circleItem) {
+  let ableReceive = false // 假设这个点不是一个落子点
+  for (let ableReceiveItem of ableReceiveCells) {
+    if (ableReceiveItem.rowIndex === circleItem.rowIndex && ableReceiveItem.columnIndex === circleItem.columnIndex) {
+      ableReceive = true
+      break
+    }
+  }
+  return ableReceive
+}
