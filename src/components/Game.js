@@ -16,6 +16,7 @@ import ConfirmBtn from './operate-area/ConfirmBtn'
 import Ranking from './operate-area/Ranking'
 import HistorySteps from './operate-area/HistorySteps'
 import SetRadius from './operate-area/SetRadius'
+// import RotateBoard from './operate-area/RotateBoard'
 import _ from 'lodash'
 
 
@@ -57,6 +58,9 @@ function Game () {
   
   // 落子点
   let [ableReceiveCells, setAbleReceiveCells] = useState([])
+  
+  // 棋盘旋转角度
+  // let [rotateDeg, setRotateDeg] = useState(0)
   
   /**
    * 处理选择主题
@@ -831,6 +835,10 @@ function Game () {
     }
   }
   
+  // function handleRotate (deg) {
+  //   setRotateDeg(deg)
+  // }
+  
   return (
     <div className="game">
       <div
@@ -848,6 +856,7 @@ function Game () {
         handleClickCircle={handleClickCircle}
         currentSelectedCell={currentSelectedCell}
         ableReceiveCells={ableReceiveCells}
+        // rotateDeg={rotateDeg}
       />
       <div className="btns-area">
         {/*选择主题*/}
@@ -887,6 +896,10 @@ function Game () {
           setRadius={setRadius}
           setDistance={setDistance}
         />
+        {/*旋转棋盘*/}
+        {/*<RotateBoard*/}
+        {/*  handleRotate={handleRotate}*/}
+        {/*/>*/}
         {/*  确定按钮*/}
         <ConfirmBtn
           cashCirclesArr={cashCirclesArr}

@@ -3,7 +3,11 @@ import Circle from './Circle'
 import { isAbleReceiveCell } from '../utils'
 
 function Board (props) {
-  let {circles, r, a, theme, handleClickCircle, currentSelectedCell, ableReceiveCells} = props
+  let {
+    circles, r, a, theme, handleClickCircle, currentSelectedCell, ableReceiveCells,
+    // rotateDeg
+  } = props
+  
   
   return (
     <div
@@ -15,6 +19,7 @@ function Board (props) {
           width: `${29.44486 * (r + a / 2)}px`,
           height: `${29.44486 * (r + a / 2)}px`,
           borderRadius: `${14.7224 * (r + a / 2)}px`,
+          // animation: `myfirst_${rotateDeg} 0.5s ease-in-out forwards`
         }}
       >
         {

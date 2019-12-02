@@ -3,6 +3,33 @@ body {
   margin: 0;
 }
 
+//@keyframes myfirst_60 {
+//  0% {
+//    transform: rotate(0deg);
+//  }
+//  100% {
+//    transform: rotate(60deg);
+//  }
+//}
+//
+//@keyframes myfirst_120 {
+//  0% {
+//    transform: rotate(0deg);
+//  }
+//  100% {
+//    transform: rotate(120deg);
+//  }
+//}
+//
+//@keyframes myfirst_180 {
+//  0% {
+//    transform: rotate(0deg);
+//  }
+//  100% {
+//    transform: rotate(180deg);
+//  }
+//}
+
 .game {
   display: flex;
   flex-direction: row;
@@ -23,6 +50,8 @@ body {
       background: url("assets/images/board-bg-1.jpg");
       background-size: cover;
       box-shadow: 0 0 20px #bbb;
+      //animation: myfirst 0.5s ease-in-out forwards;
+
 
       .board-row {
         display: flex;
