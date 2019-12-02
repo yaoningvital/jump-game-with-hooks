@@ -15,6 +15,7 @@ import NextPlayer from './operate-area/NextPlayer'
 import ConfirmBtn from './operate-area/ConfirmBtn'
 import Ranking from './operate-area/Ranking'
 import HistorySteps from './operate-area/HistorySteps'
+import SetRadius from './operate-area/SetRadius'
 import _ from 'lodash'
 
 
@@ -445,24 +446,24 @@ function Game () {
   /**
    * 处理点击“确定”按钮
    */
-  function handleConfirm () {
+  function handleConfirm (e) {
     let newest_circles = cashCirclesArr[cashCirclesArr.length - 1]
     
-    // 2、更新 cashCirclesArr
+    // 1、更新 cashCirclesArr
     setCashCirclesArr([newest_circles])
-    // 3、更新当前步骤（大步）
+    // 2、更新当前步骤（大步）
     setCurrentStep(currentStep + 1)
-    // 4、更新当前选中的棋子
+    // 3、更新当前选中的棋子
     setCurrentSelectedCell({})
-    // 5、更新落子点
+    // 4、更新落子点
     setAbleReceiveCells([])
-    // 6、更新 ranking
+    // 5、更新 ranking
     let new_ranking = getNewRanking(newest_circles, ranking)
     setRanking(new_ranking)
-    // 7、更新 currentRole
+    // 6、更新 currentRole
     let new_currentRole = getNewCurrentRole(ranking, new_ranking, currentRole)
     setCurrentRole(new_currentRole)
-    // 1、更新 history
+    // 7、更新 history
     let new_history = _.cloneDeep(history)
     new_history = new_history.slice(0, currentStep + 1)
     new_history.push({
@@ -783,21 +784,51 @@ function Game () {
    * @param stepNum : 回退到的步数
    */
   function handleBackTo (stepNum) {
-    // 1、更新 cashCirclesArr
-    let new_cashCirclesArr = [history[stepNum].circles]
-    setCashCirclesArr(new_cashCirclesArr)
-    // 2、更新 currentStep
-    setCurrentStep(stepNum)
-    // 3、更新 当前选中的棋子
-    setCurrentSelectedCell({})
-    // 4、更新 落子点
-    setAbleReceiveCells([])
-    // 5、更新 ranking
-    let new_ranking = history[stepNum].ranking
-    setRanking(new_ranking)
-    // 6、更新 currentRole
-    let new_currentRole = history[stepNum].currentRole
-    setCurrentRole(new_currentRole)
+    console.log('typeof stepNum:', typeof stepNum)
+    // 重新开始游戏
+    if (stepNum === 0) {
+      setCashCirclesArr([circlesDefault])
+      setCurrentStep(0)
+      setCurrentSelectedCell({})
+      setAbleReceiveCells([])
+      setSelectedRoles([])
+      setRanking([])
+      setCurrentRole(null)
+      setHistory(initialHistory)
+    }
+    // 回退到某一步
+    else {
+      // 1、更新 cashCirclesArr
+      let new_cashCirclesArr = [history[stepNum].circles]
+      setCashCirclesArr(new_cashCirclesArr)
+      // 2、更新 currentStep
+      setCurrentStep(stepNum)
+      // 3、更新 当前选中的棋子
+      setCurrentSelectedCell({})
+      // 4、更新 落子点
+      setAbleReceiveCells([])
+      // 5、更新 ranking
+      let new_ranking = history[stepNum].ranking
+      setRanking(new_ranking)
+      // 6、更新 currentRole
+      let new_currentRole = history[stepNum].currentRole
+      setCurrentRole(new_currentRole)
+    }
+    
+  }
+  
+  function setRadius (e) {
+    // console.log(' e.keyCode:', e.keyCode)
+    // console.log('typeof e.target.value:', typeof e.target.value)
+    if (e.keyCode === 13) {
+      setLayout({...layout, r: +e.target.value})
+    }
+  }
+  
+  function setDistance (e) {
+    if (e.keyCode === 13) {
+      setLayout({...layout, a: +e.target.value})
+    }
   }
   
   return (
@@ -848,6 +879,13 @@ function Game () {
         <HistorySteps
           history={history}
           handleBackTo={handleBackTo}
+        />
+        {/*设置棋子半径、棋子间距*/}
+        <SetRadius
+          r={layout.r}
+          a={layout.a}
+          setRadius={setRadius}
+          setDistance={setDistance}
         />
         {/*  确定按钮*/}
         <ConfirmBtn
