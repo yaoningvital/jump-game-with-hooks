@@ -13,6 +13,8 @@ import SelectTheme from './operate-area/SelectTheme'
 import SelectRoles from './operate-area/SelectRoles'
 import NextPlayer from './operate-area/NextPlayer'
 import ConfirmBtn from './operate-area/ConfirmBtn'
+import Ranking from './operate-area/Ranking'
+import HistorySteps from './operate-area/HistorySteps'
 import _ from 'lodash'
 
 
@@ -33,10 +35,14 @@ function Game () {
   let [currentStep, setCurrentStep] = useState(0)
   
   // 历史记录
-  let initialHistory = [{circles: circlesDefault}]
+  let initialHistory = [{
+    circles: circlesDefault,
+    ranking: [],
+    currentRole: null
+  }]
   let [history, setHistory] = useState(initialHistory)
   
-  // 当前选中的棋子的位置坐标
+  // 当前选中的棋子
   let [currentSelectedCell, setCurrentSelectedCell] = useState({})
   
   // 已经完成游戏的玩家排名
@@ -59,11 +65,11 @@ function Game () {
     if (theme !== index) {
       setTheme(index)
       setSelectedRoles([])
-      setHistory([{circles: circlesDefault}])
       setCurrentSelectedCell({})
       setCurrentRole(null)
       setCashCirclesArr([circlesDefault])
       setAbleReceiveCells([])
+      setHistory([{circles: circlesDefault, ranking: [], currentRole: null}])
     }
   }
   
@@ -73,7 +79,13 @@ function Game () {
    * @param roleIndex : 选择的角色的索引
    */
   function handleSelectRole (roleIndex) {
-    // 1、更新已选择的角色
+    // 1、设置当前选中棋子为空
+    setCurrentSelectedCell({})
+    
+    // 2、设置 当前落子点 为空
+    setAbleReceiveCells([])
+    
+    // 3、更新已选择的角色
     let new_selectedRoles = selectedRoles.slice()
     if (new_selectedRoles.includes(roleIndex)) { // 取消一个角色
       new_selectedRoles = deleteRole(new_selectedRoles, roleIndex)
@@ -84,21 +96,14 @@ function Game () {
     }
     setSelectedRoles(new_selectedRoles)
     
-    // 2、更新棋盘棋子布局
-    let circlesOrigin = updateBoardCirclesLayout(theme, new_selectedRoles)
-    setHistory([{circles: circlesOrigin}])
-    setCashCirclesArr([circlesOrigin])
-    
-    // 3、设置当前选中棋子为空
-    setCurrentSelectedCell({})
-    
     // 4、更新 当前玩家 的角色
     let new_currentRole = new_selectedRoles.length > 0 ? new_selectedRoles[0] : null
     setCurrentRole(new_currentRole)
     
-    // 5、设置 当前落子点 为空
-    setAbleReceiveCells([])
-    
+    // 5、更新棋盘棋子布局
+    let circlesOrigin = updateBoardCirclesLayout(theme, new_selectedRoles)
+    setHistory([{circles: circlesOrigin, ranking: [], currentRole: new_currentRole}])
+    setCashCirclesArr([circlesOrigin])
   }
   
   /**
@@ -442,10 +447,7 @@ function Game () {
    */
   function handleConfirm () {
     let newest_circles = cashCirclesArr[cashCirclesArr.length - 1]
-    // 1、更新 history
-    let new_history = _.cloneDeep(history)
-    new_history.push({circles: newest_circles})
-    setHistory(new_history)
+    
     // 2、更新 cashCirclesArr
     setCashCirclesArr([newest_circles])
     // 3、更新当前步骤（大步）
@@ -460,6 +462,15 @@ function Game () {
     // 7、更新 currentRole
     let new_currentRole = getNewCurrentRole(ranking, new_ranking, currentRole)
     setCurrentRole(new_currentRole)
+    // 1、更新 history
+    let new_history = _.cloneDeep(history)
+    new_history = new_history.slice(0, currentStep + 1)
+    new_history.push({
+      circles: newest_circles,
+      ranking: new_ranking,
+      currentRole: new_currentRole
+    })
+    setHistory(new_history)
   }
   
   /**
@@ -767,6 +778,27 @@ function Game () {
     return newCurrentRole
   }
   
+  /**
+   * 处理回退到第几步
+   * @param stepNum : 回退到的步数
+   */
+  function handleBackTo (stepNum) {
+    // 1、更新 cashCirclesArr
+    let new_cashCirclesArr = [history[stepNum].circles]
+    setCashCirclesArr(new_cashCirclesArr)
+    // 2、更新 currentStep
+    setCurrentStep(stepNum)
+    // 3、更新 当前选中的棋子
+    setCurrentSelectedCell({})
+    // 4、更新 落子点
+    setAbleReceiveCells([])
+    // 5、更新 ranking
+    let new_ranking = history[stepNum].ranking
+    setRanking(new_ranking)
+    // 6、更新 currentRole
+    let new_currentRole = history[stepNum].currentRole
+    setCurrentRole(new_currentRole)
+  }
   
   return (
     <div className="game">
@@ -806,6 +838,16 @@ function Game () {
           selectedRoles={selectedRoles}
           ranking={ranking}
           currentRole={currentRole}
+        />
+        {/*当前排名*/}
+        <Ranking
+          theme={theme}
+          ranking={ranking}
+        />
+        {/*历史步骤*/}
+        <HistorySteps
+          history={history}
+          handleBackTo={handleBackTo}
         />
         {/*  确定按钮*/}
         <ConfirmBtn

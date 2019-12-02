@@ -148,13 +148,57 @@ body {
     }
 
     .confirm-btn {
-      width: 180px;
+      width: 250px;
       height: 100px;
       position: fixed;
       bottom: 30px;
       right: 570px;
       font-size: 30px;
       outline: none;
+    }
+
+    .ranking {
+      div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        p {
+          margin: 4px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          margin-right: 10px;
+          border: 1px dashed #999999;
+          padding: 2px 4px;
+          background-color: #ddd;
+
+          button {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            border-style: none;
+            background-size: 40px 40px;
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .history-steps {
+      div {
+        //height: 300px;
+        max-height: 300px;
+        overflow-y: scroll;
+
+        button {
+
+        }
+      }
     }
   }
 }
